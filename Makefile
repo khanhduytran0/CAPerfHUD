@@ -1,3 +1,4 @@
+ARCHS := arm64
 FINALPACKAGE := 1
 TARGET := iphone:clang:latest:11.0
 INSTALL_TARGET_PROCESSES = CAPerfHUD
