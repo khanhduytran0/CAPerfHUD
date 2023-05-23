@@ -1,8 +1,8 @@
 Package: com.kdt.caperfhud
 Name: CAPerfHUD
-Version: 0.0.1
+Version: 1.0.0
 Architecture: iphoneos-arm
 Description: Enable system-wide performance HUD
-Maintainer: khanhduy032
-Author: khanhduy032
+Maintainer: khanhduytran0
+Author: khanhduytran0
 Section: Utilities

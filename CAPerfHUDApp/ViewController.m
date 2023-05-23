@@ -1,11 +1,5 @@
+#import "CADebugCommon.h"
 #import "ViewController.h"
-
-#define CA_DEBUG_OPTION_PERF_HUD 0x24
-
-int CARenderServerGetDebugOption(mach_port_t port, int key);
-int CARenderServerGetDebugValue(mach_port_t port, int key);
-void CARenderServerSetDebugOption(mach_port_t port, int key, int value);
-void CARenderServerSetDebugValue(mach_port_t port, int key, int value);
 
 @interface ViewController ()
 @property(nonatomic) NSArray* modes;
@@ -19,13 +13,9 @@ void CARenderServerSetDebugValue(mach_port_t port, int key, int value);
     [super viewDidLoad];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.title = @"CAPerfHUD";
-    self.modes = @[@"Off", @"Basic", @"Backdrop", @"Particles", @"Full", @"Frequencies", @"Power", @"FPS only", @"Display", @"Glitches"];
+    self.modes = CADebugCommon.perfHUDLevelNames;
 
-    int selected = -1;
-    if (CARenderServerGetDebugOption(0, CA_DEBUG_OPTION_PERF_HUD)) {
-        selected = CARenderServerGetDebugValue(0, 1);
-    }
-    self.selectedMode = [NSIndexPath indexPathForRow:selected+1 inSection:0];
+    self.selectedMode = [NSIndexPath indexPathForRow:CADebugCommon.perfHUDLevel inSection:0];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -57,9 +47,7 @@ void CARenderServerSetDebugValue(mach_port_t port, int key, int value);
     selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
     self.selectedMode = indexPath;
 
-    int value = indexPath.row - 1;
-    CARenderServerSetDebugOption(0, CA_DEBUG_OPTION_PERF_HUD, value != -1);
-    CARenderServerSetDebugValue(0, 1, value);
+    CADebugCommon.perfHUDLevel = indexPath.row;
 }
 
 @end

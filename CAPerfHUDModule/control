@@ -1,0 +1,9 @@
+Package: com.kdt.caperfhudmodule
+Name: CAPerfHUDModule
+Depends: com.opa334.ccsupport
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Enable system-wide performance HUD from the control center.
+Maintainer: khanhduytran0
+Author: khanhduytran0
+Section: Control Center (Modules)

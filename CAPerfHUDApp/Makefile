@@ -7,9 +7,9 @@ include $(THEOS)/makefiles/common.mk
 
 APPLICATION_NAME = CAPerfHUD
 
-CAPerfHUD_FILES = main.m AppDelegate.m SceneDelegate.m ViewController.m
+CAPerfHUD_FILES = main.m AppDelegate.m SceneDelegate.m ViewController.m ../Common/CADebugCommon.m
 CAPerfHUD_FRAMEWORKS = UIKit QuartzCore
-CAPerfHUD_CFLAGS = -fobjc-arc
+CAPerfHUD_CFLAGS = -fobjc-arc -I../Common
 CAPerfHUD_CODESIGN_FLAGS = -Sentitlements.xml
 
 include $(THEOS_MAKE_PATH)/application.mk
