@@ -1,5 +1,5 @@
 #import <UIKit/UIKit.h>
-#import <ControlCenterUIKit/ControlCenterUIKit.h>
+#import <ControlCenterUIKit/CCUIContentModule.h>
 
 #import "CAPHMenuModuleViewController.h"
 
