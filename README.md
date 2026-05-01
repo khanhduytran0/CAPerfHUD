@@ -11,7 +11,6 @@ Enable system-wide performance HUD for iOS 13+. Requires jailbreak or TrollStore
 ## Source code structure
 - `CAPerfHUDApp`: Application for AppSync/TrollStore.
 - `CAPerfHUDModule`: CCSupport module for jailbroken devices.
-- `CAPerfHUDModule/CADebugHelper`: helper executable to get/set debug values because SpringBoard isn't entitled to do so.
 
 ## Building
 ```

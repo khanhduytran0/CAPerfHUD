@@ -8,17 +8,24 @@
 };
 
 + (NSInteger)perfHUDLevel {
-    if (!CARenderServerGetDebugOption(0, CA_DEBUG_OPTION_PERF_HUD)) {
+    if (!(CARenderServerGetDebugFlags(0) & CA_DEBUG_FLAG_PERF_HUD)) {
         return 0;
     }
     return CARenderServerGetDebugValue(0, 1)+1;
 }
 
 + (void)setPerfHUDLevel:(NSInteger)level {
-    CARenderServerSetDebugOption(0, CA_DEBUG_OPTION_PERF_HUD, level != 0);
-    if (level > 0) {
-        CARenderServerSetDebugValue(0, 1, level-1);
+    BOOL enabled = level != 0;
+    int flags = CARenderServerGetDebugFlags(0);
+    if (enabled) {
+        flags |= CA_DEBUG_FLAG_PERF_HUD;
+        if (level > 0) {
+            CARenderServerSetDebugValue(0, 1, level-1);
+        }
+    } else {
+        flags &= ~CA_DEBUG_FLAG_PERF_HUD;
     }
+    CARenderServerSetDebugFlags(0, CA_DEBUG_FLAG_PERF_HUD, flags);
 }
 
 @end

@@ -1,6 +1,6 @@
 FINALPACKAGE := 1
 ifeq ($(THEOS_PACKAGE_SCHEME),rootless)
-TARGET := iphone:clang:latest:15.0
+TARGET := iphone:clang:16.5:15.0
 else
 TARGET := iphone:clang:latest:13.0
 endif
@@ -17,5 +17,4 @@ CAPerfHUDModule_PRIVATE_FRAMEWORKS = ControlCenterUIKit
 CAPerfHUDModule_INSTALL_PATH = /Library/ControlCenter/Bundles/
 
 include $(THEOS_MAKE_PATH)/bundle.mk
-SUBPROJECTS += CADebugHelper
 include $(THEOS_MAKE_PATH)/aggregate.mk

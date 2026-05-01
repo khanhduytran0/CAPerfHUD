@@ -24,7 +24,7 @@
 }
 
 - (void)controlCenterWillPresent {
-    self.selectedLevel = [self execHelperSet:NO level:0];
+    self.selectedLevel = CADebugCommon.perfHUDLevel;
     self.selected = self.selectedLevel > 0;
 }
 
@@ -47,8 +47,8 @@
 
 - (void)buttonTapped:(CCUIButtonModuleView *)button forEvent:(UIEvent *)event {
     self.selected = !self.selected;
-    // Set 10 if enabled, 0 otherwise
-    self.selectedLevel = [self execHelperSet:YES level:self.selected*10];
+    // Set -1 if enabled, 0 otherwise
+    CADebugCommon.perfHUDLevel = CADebugCommon.perfHUDLevel ? 0 : -1;
 
     [super buttonTapped:button forEvent:event];
 }
@@ -73,31 +73,7 @@
     self.selected = YES;
     self.selectedLevel = [menuItemsViews indexOfObject:view]+1;
 
-    [self execHelperSet:YES level:self.selectedLevel];
-}
-
-- (int)execHelperSet:(BOOL)set level:(int)level {
-    pid_t pid;
-    int status;
-    const char **args;
-    if (set) {
-        char levelStr[3];
-        sprintf(levelStr, "%d", level);
-        args = (const char *[]){"CADebugHelper", levelStr, NULL};
-    } else {
-        args = (const char *[]){"CADebugHelper", NULL};
-    }
-
-    status = posix_spawn(&pid, HELPER_EXEC_PATH, NULL, NULL, (char* const*)args, NULL);
-    if (status != 0) {
-        return 0;
-    }
-
-    if (waitpid(pid, &status, 0) == -1) {
-        return 0;
-    }
-
-    return WEXITSTATUS(status);
+    CADebugCommon.perfHUDLevel = self.selectedLevel;
 }
 
 - (void)setSelected:(BOOL)selected {

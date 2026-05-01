@@ -1,11 +1,10 @@
 #import <UIKit/UIKit.h>
 
-#define CA_DEBUG_OPTION_PERF_HUD 0x24
-
-int CARenderServerGetDebugOption(mach_port_t port, int key);
-int CARenderServerGetDebugValue(mach_port_t port, int key);
-void CARenderServerSetDebugOption(mach_port_t port, int key, int value);
-void CARenderServerSetDebugValue(mach_port_t port, int key, int value);
+#define CA_DEBUG_FLAG_PERF_HUD 0x10000000
+extern int CARenderServerGetDebugFlags(mach_port_t port);
+extern int CARenderServerGetDebugValue(mach_port_t port, int key);
+extern void CARenderServerSetDebugFlags(mach_port_t port, int key, int value);
+extern void CARenderServerSetDebugValue(mach_port_t port, int key, int value);
 
 @interface CADebugCommon : NSObject
 
